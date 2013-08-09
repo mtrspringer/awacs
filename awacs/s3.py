@@ -3,7 +3,7 @@
 #
 # See LICENSE file for full license.
 
-from aws import Action
+from aws import Action, ARN
 
 service_name = 'Amazon S3'
 prefix = 's3'
@@ -12,7 +12,7 @@ prefix = 's3'
 class S3_ARN(ARN):
     def __init__(self, resource):
         sup = super(S3_ARN, self)
-        sup.__init__('s3', '', '', resource)
+        sup.__init__('s3', resource, '', '')
 
 
 AbortMultipartUpload = Action(prefix, 'AbortMultipartUpload')
