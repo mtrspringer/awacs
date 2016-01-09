@@ -3,32 +3,43 @@
 #
 # See LICENSE file for full license.
 
-from aws import Action
+from aws import Action as BaseAction
+from aws import BaseARN
 
 service_name = 'AWS CloudFormation'
 prefix = 'cloudformation'
 
 
-class CloudformationAction(Action):
+class Action(BaseAction):
     def __init__(self, action=None):
-        self.prefix = prefix
-        self.action = action
+        sup = super(Action, self)
+        sup.__init__(prefix, action)
 
 
-CancelUpdateStack = CloudformationAction('CancelUpdateStack')
-CreateStack = CloudformationAction('CreateStack')
-DeleteStack = CloudformationAction('DeleteStack')
-DescribeStackEvents = CloudformationAction('DescribeStackEvents')
-DescribeStackResource = CloudformationAction('DescribeStackResource')
-DescribeStackResources = CloudformationAction('DescribeStackResources')
-DescribeStacks = CloudformationAction('DescribeStacks')
-EstimateTemplateCost = CloudformationAction('EstimateTemplateCost')
-GetStackPolicy = CloudformationAction('GetStackPolicy')
-GetTemplate = CloudformationAction('GetTemplate')
-GetTemplateSummary = CloudformationAction('GetTemplateSummary')
-ListStackResources = CloudformationAction('ListStackResources')
-ListStacks = CloudformationAction('ListStacks')
-SetStackPolicy = CloudformationAction('SetStackPolicy')
-SignalResource = CloudformationAction('SignalResource')
-UpdateStack = CloudformationAction('UpdateStack')
-ValidateTemplate = CloudformationAction('ValidateTemplate')
+class ARN(BaseARN):
+    def __init__(self, resource='', region='', account=''):
+        sup = super(ARN, self)
+        sup.__init__(service=prefix, resource=resource, region=region,
+                     account=account)
+
+
+CancelUpdateStack = Action('CancelUpdateStack')
+CreateStack = Action('CreateStack')
+CreateUploadBucket = Action('CreateUploadBucket')
+DeleteStack = Action('DeleteStack')
+DescribeAccountLimits = Action('DescribeAccountLimits')
+DescribeStackEvents = Action('DescribeStackEvents')
+DescribeStackResource = Action('DescribeStackResource')
+DescribeStackResources = Action('DescribeStackResources')
+DescribeStacks = Action('DescribeStacks')
+EstimateTemplateCost = Action('EstimateTemplateCost')
+GetStackPolicy = Action('GetStackPolicy')
+GetTemplate = Action('GetTemplate')
+GetTemplateSummary = Action('GetTemplateSummary')
+ListStackResources = Action('ListStackResources')
+ListStacks = Action('ListStacks')
+PreviewStackUpdate = Action('PreviewStackUpdate')
+SetStackPolicy = Action('SetStackPolicy')
+SignalResource = Action('SignalResource')
+UpdateStack = Action('UpdateStack')
+ValidateTemplate = Action('ValidateTemplate')
